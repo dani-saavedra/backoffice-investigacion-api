@@ -48,7 +48,11 @@ const resolvers = {
             return nuevoUsuario.save()
                 .then(u => "usuario creado")
                 .catch(err => "fallo la creacion");
-
+        },
+        activeUser: (parent, args, context, info) => {
+            return User.updateOne({ identificacion: args.identificacion }, { estado: "Activo" })
+                .then(u => "Usuario Activo")
+                .catch(err => "Fallo la Activacion");
         }
     }
 }
