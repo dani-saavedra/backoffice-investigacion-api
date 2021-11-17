@@ -58,6 +58,11 @@ const resolvers = {
             return User.deleteOne({ identificacion: args.ident })
                 .then(u => "Usuario eliminado")
                 .catch(err => "Fallo la eliminacion");
+        },
+        deleteProject: (parent, args, context, info) => {
+            return Project.updateOne({ nombre: args.nombreProyecto }, { activo: false })
+                .then(u => "Proyecto 'eliminado'")
+                .catch(err => "Fallo la eliminacion");
         }
     }
 }

@@ -3,7 +3,8 @@ const { Schema, model } = require('mongoose')
 const project = new Schema({
     nombre: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     lider: String,
     facultad: String,
