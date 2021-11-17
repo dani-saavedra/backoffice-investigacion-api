@@ -15,6 +15,7 @@ const project = new Schema({
     activo: {
         type: Boolean,
         default: true
-    }
+    },
+    integrantes: [Number]
 })
 module.exports = model('proyectos', project)

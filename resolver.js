@@ -63,6 +63,17 @@ const resolvers = {
             return Project.updateOne({ nombre: args.nombreProyecto }, { activo: false })
                 .then(u => "Proyecto 'eliminado'")
                 .catch(err => "Fallo la eliminacion");
+        },
+        insertUserToProject: (parent, args, context, info) => {
+            let user;
+            User.find({ identificacion: args.identificacion })
+                .then(userBd => user = userBd)
+                .catch(err => console.log("Usuario inexistente"));
+            if (user && user.estado == "Activo") {
+                //suscripcion al proyect . pasar el nombre del project, mirar si el projecto esta activo
+            } else {
+                return "Usuario no valido"
+            }
         }
     }
 }
