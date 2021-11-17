@@ -51,10 +51,14 @@ const resolvers = {
         },
         activeUser: (parent, args, context, info) => {
             return User.updateOne({ identificacion: args.identificacion }, { estado: "Activo" })
-                .then(u => "Usuario Activo")
-                .catch(err => "Fallo la Activacion");
+                .then(u => "Usuario activo")
+                .catch(err => "Fallo la activacion");
+        },
+        deleteUser: (parent, args, context, info) => {
+            return User.deleteOne({ identificacion: args.ident })
+                .then(u => "Usuario eliminado")
+                .catch(err => "Fallo la eliminacion");
         }
     }
 }
-//ENCRIPTAR LA CLAVE
 module.exports = resolvers
