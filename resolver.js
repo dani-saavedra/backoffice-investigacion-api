@@ -64,13 +64,20 @@ const resolvers = {
                 .then(u => "Proyecto 'eliminado'")
                 .catch(err => "Fallo la eliminacion");
         },
-        insertUserToProject: (parent, args, context, info) => {
-            let user;
-            User.find({ identificacion: args.identificacion })
-                .then(userBd => user = userBd)
-                .catch(err => console.log("Usuario inexistente"));
-            if (user && user.estado == "Activo") {
-                //suscripcion al proyect . pasar el nombre del project, mirar si el projecto esta activo
+        insertUserToProject: async (parent, args, context, info) => {
+            const user = await User.findOne({ identificacion: args.identificacion })
+            if (user && user.estado === "Activo") {
+                const project = await Project.findOne({ nombre: args.nombreProyecto })
+                if (project && project.activo) {
+                    if (project.integrantes.find(i => i == user.identificacion)) {
+                        return "El usuario ya pertenece al proyecto indicado"
+                    } else {
+                        await Project.updateOne({ nombre: args.nombreProyecto }, { $push: { integrantes: user.identificacion } })
+                        return "Usuario adicionado correctamente"
+                    }
+                } else {
+                    return "Proyecto no valido para adicionar un integrante, consulte al administrador"
+                }
             } else {
                 return "Usuario no valido"
             }

@@ -29,7 +29,7 @@ const typeDefs = gql`
         activeUser(identificacion:Int):String
         deleteUser(ident:Int):String
         deleteProject(nombreProyecto:String):String
-        insertUserToProject(identificacion:Int):String
+        insertUserToProject(identificacion:Int,nombreProyecto:String):String
     }
 `
 module.exports = typeDefs
