@@ -11,6 +11,7 @@ const typeDefs = gql`
     type Proyecto{
         lider: String
         facultad: String
+        nombre:String
     }
     type Query{
         usuarios: [Usuario]
