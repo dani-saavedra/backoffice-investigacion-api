@@ -20,6 +20,7 @@
     "D": "^1.0.0",
     "express": "^4.17.1",
     "graphql": "^15.7.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.12"
   },
   "devDependencies": {
