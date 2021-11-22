@@ -1,5 +1,6 @@
 const { gql } = require('apollo-server-express')
 
+//Nodemon
 const typeDefs = gql`
     type Usuario{
         nombre: String
@@ -12,6 +13,7 @@ const typeDefs = gql`
         lider: String
         facultad: String
         nombre:String
+        integrantes:[Usuario]
     }
     type Query{
         usuarios: [Usuario]
@@ -25,8 +27,14 @@ const typeDefs = gql`
         clave: String
         perfil: String
     }
+    input ProjectInput{
+        nombre: String
+        lider:String
+        facultad: String
+    }
     type Mutation{
         createUser(user:UserInput):String
+        createProject(project:ProjectInput):String
         activeUser(identificacion:Int):String
         deleteUser(ident:Int):String
         deleteProject(nombreProyecto:String):String
