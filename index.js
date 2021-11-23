@@ -1,5 +1,6 @@
 
 require('./infraestructura/conectionDB')
+const { validarToken, admin, estudiante } = require('./middleware/authjwt')
 
 const typeDefs = require('./typeDef')
 const resolvers = require('./resolver')
@@ -22,6 +23,13 @@ const iniciarServidor = async () => {
     })*/
     api.use(express.json())  //PARA TRABAJAR CON JSON
     api.use('/api', authRoute)
+    api.get('/api/dashboard/admin', [validarToken, admin], (request, response) => {
+        response.json("Soy el dashboard")
+    })
+
+    api.get('/api/dashboard/estudiante', [validarToken, estudiante], (request, response) => {
+        response.json("Soy el dashboard")
+    })
     api.listen('9092', () => console.log('Inicio server'))
 }
 iniciarServidor()

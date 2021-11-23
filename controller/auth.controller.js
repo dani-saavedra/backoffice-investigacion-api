@@ -5,6 +5,7 @@ const key = 'CLAVEDIFICIL';
 
 /*
     401 -> no autorizado
+    403 -> Recurso probihido para el rol actual
     404 -> not found - Recurso que pediste no exist
     400 -> Enviaste algo que no era o bad Request
     500 -> Se exploto el servidor
@@ -22,7 +23,7 @@ const singIn = async (request, response) => {
             return response.status(401).json({ response: "Verique usuario y contrasena" })
         }
         const token = jwt.sign({
-            role: usuario.perfil
+            rolesito: usuario.perfil
         }, key, { expiresIn: 60 * 60 * 2 })
 
         response.status(200).json({ jwt: token })
