@@ -1,5 +1,8 @@
 const Project = require('../model/proyectoModel')
 const User = require('../model/usuarioModel')
+const { v4: uuidv4 } = require('uuid');
+
+
 
 const addUserProject = async (identificacion, nombreProyecto) => {
     const user = await User.findOne({ identificacion })
@@ -22,6 +25,7 @@ const addUserProject = async (identificacion, nombreProyecto) => {
 
 const createProject = (project) => {
     const nuevoProyecto = new Project(project);
+    nuevoProyecto.identificador = uuidv4()
     return nuevoProyecto.save()
         .then(u => "Proyecto creado")
         .catch(err => console.log(err));

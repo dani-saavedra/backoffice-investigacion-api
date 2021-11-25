@@ -1,21 +1,31 @@
 const { Schema, model } = require('mongoose')
 
+
 const project = new Schema({
+    identificador: {
+        type: String,
+        required: true,
+        unique: true
+    },
     nombre: {
         type: String,
         required: true,
         unique: true
     },
-    lider: String,
-    facultad: String,
-    fechaInicio: {
+    objetivosGenerales: String,
+    objetivosEspecificos: [String],
+    presupuesto: Number,
+    fecha_inicio: {
         type: Date,
         default: new Date()
     },
-    activo: {
-        type: Boolean,
-        default: true
+    fecha_terminacion: Date,
+    estado: {
+        type: String,
+        default: "inactivo"
     },
+    fase: String,
+    lider: String,
     integrantes: [{
         type: Schema.Types.ObjectId,
         ref: "usuarios"
