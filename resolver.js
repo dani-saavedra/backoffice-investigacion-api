@@ -8,6 +8,7 @@ const Project = require('./model/proyectoModel')
 const User = require('./model/usuarioModel')
 let aes256 = require('aes256');
 const { isLider } = require('./middleware/authjwt');
+const jwt = require('jsonwebtoken')
 
 
 const listUsuarios = [
@@ -42,7 +43,9 @@ const resolvers = {
     Query: {
         usuarios: () => listUsuarios,
         usuario: (parent, args, context, info) => buscarUsuarioPorIdentificacion(args.identificacion),
-        proyectos: async () => proyectos(),
+        proyectos: async (parent, args, context, info) => {
+            return proyectos()
+        },
         getProject: async (parent, args, context, info) => getProject(args.nombre),
     },
     Mutation: {
@@ -88,6 +91,26 @@ const resolvers = {
                 createProject(args.project)
             }
         },
+        autenticar: async(parent, args, context, info) => {
+            try {
+                const usuario = await User.findOne({ email: args.usuario })
+                if (!usuario) {
+                    return  "Verique usuario y contrasena" 
+                }
+        
+                const claveDesencriptada = aes256.decrypt(key, usuario.clave)
+                if (args.clave != claveDesencriptada) {
+                    return "Verique usuario y contrasena"
+                }
+                const token = jwt.sign({
+                    rolesito: usuario.perfil
+                }, key, { expiresIn: 60 * 60 * 2 })
+        
+                return token 
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 }
 module.exports = resolvers

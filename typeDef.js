@@ -45,6 +45,7 @@ const typeDefs = gql`
         deleteUser(ident:Int):String
         deleteProject(nombreProyecto:String):String
         insertUserToProject(identificacion:Int,nombreProyecto:String):String
+        autenticar(usuario:String, clave:String):String
     }
 `
 module.exports = typeDefs

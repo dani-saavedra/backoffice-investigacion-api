@@ -29,6 +29,7 @@ const iniciarServidor = async () => {
                 } catch (error) {
                     console.log(error)
                 }
+                return {}
             }
         });
     await apollo.start()
