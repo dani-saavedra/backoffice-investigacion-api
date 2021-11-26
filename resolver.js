@@ -7,6 +7,7 @@ const { buscarUsuarioPorIdentificacion } = require('./service/usuario.service')
 const Project = require('./model/proyectoModel')
 const User = require('./model/usuarioModel')
 let aes256 = require('aes256');
+const { isLider } = require('./middleware/authjwt');
 
 
 const listUsuarios = [
@@ -60,11 +61,18 @@ const resolvers = {
                 .catch(err => "Fallo la activacion");
         },
         deleteUser: (parent, args, context, info) => {
-            return User.deleteOne({ identificacion: args.ident })
-                .then(u => "Usuario eliminado")
-                .catch(err => "Fallo la eliminacion");
+            if (isLider(context.rol)) {
+                return User.deleteOne({ identificacion: args.ident })
+                    .then(u => "Usuario eliminado")
+                    .catch(err => "Fallo la eliminacion");
+            }
         },
-        deleteProject: (parent, args, context, info) => deleteProject(args.nombreProyecto),
+        deleteProject: (parent, args, context, info) => {
+            if (isLider(context.rol)) {
+                deleteProject(args.nombreProyecto)
+            }
+            //code smells... Recuerdan?
+        },
         insertUserToProject: async (parent, args, context, info) => addUserProject(args.identificacion, args.nombreProyecto),
         createUser: (parent, args, context, info) => {
             const { clave } = args.user;
@@ -75,7 +83,11 @@ const resolvers = {
                 .then(u => "usuario creado")
                 .catch(err => console.log(err));
         },
-        createProject: (parent, args, context, info) => createProject(args.project),
+        createProject: (parent, args, context, info) => {
+            if (isLider(context.rol)) {
+                createProject(args.project)
+            }
+        },
     }
 }
 module.exports = resolvers

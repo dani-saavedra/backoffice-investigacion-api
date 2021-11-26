@@ -1,6 +1,7 @@
 
 require('./infraestructura/conectionDB')
 const { validarToken, admin, estudiante } = require('./middleware/authjwt')
+const jwt = require('jsonwebtoken')
 
 const typeDefs = require('./typeDef')
 const resolvers = require('./resolver')
@@ -9,12 +10,26 @@ const authRoute = require('./routes/auth.routes')
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
 
+const key = 'CLAVEDIFICIL';
+
 const iniciarServidor = async () => {
     const api = express();
     const apollo = new ApolloServer(
         {
             typeDefs,
-            resolvers
+            resolvers,
+            context: ({ req }) => {
+                const token = req.headers.authorization;
+                try {
+                    const perfil = jwt.verify(token, key)
+                    if (perfil) {
+                        rol = perfil.rolesito
+                        return {rol}
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            }
         });
     await apollo.start()
     apollo.applyMiddleware({ app: api })

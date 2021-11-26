@@ -24,6 +24,12 @@ const admin = (request, response, next) => {
     }
     next();
 }
+const isLider = (rol) => {
+    return rol === "Lider"
+}
+const isAdmin = (rol) => {
+    return rol === "Admin"
+}
 
 const estudiante = (request, response, next) => {
     if (request.perfil != "Estudiante") {
@@ -34,5 +40,7 @@ const estudiante = (request, response, next) => {
 module.exports = {
     validarToken,
     admin,
-    estudiante
+    estudiante,
+    isAdmin,
+    isLider
 }
