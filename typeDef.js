@@ -18,6 +18,7 @@ const typeDefs = gql`
         fechaTerminacion: Date
         lider: String
         nombre:String
+        _id:ID
     }
     type Query{
         usuarios: [Usuario]
@@ -38,6 +39,10 @@ const typeDefs = gql`
         lider: String
         nombre:String
     }
+    type Auth{
+        jwt: String
+        status: Int
+    }
     type Mutation{
         createUser(user:UserInput):String
         createProject(project:ProjectInput):String
@@ -45,7 +50,7 @@ const typeDefs = gql`
         deleteUser(ident:Int):String
         deleteProject(nombreProyecto:String):String
         insertUserToProject(identificacion:Int,nombreProyecto:String):String
-        autenticar(usuario:String, clave:String):String
+        autenticar(usuario:String, clave:String):Auth
     }
 `
 module.exports = typeDefs
