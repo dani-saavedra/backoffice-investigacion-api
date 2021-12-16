@@ -32,6 +32,7 @@ const iniciarServidor = async () => {
             }
         });
     await apollo.start()
+    console.log("hola mundo")
     apollo.applyMiddleware({ app: api })
     /*api.use((request, response) => {
         response.send('Hola')
