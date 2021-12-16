@@ -12,7 +12,6 @@ jobs:
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        VERS: $(date +%s)
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: build the docker image
       run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/back-invests
