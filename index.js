@@ -42,7 +42,7 @@ const iniciarServidor = async () => {
     api.get('/api/dashboard/admin', [validarToken, admin], (request, response) => {
         response.json("Soy el dashboard")
     })
-    api.get('/hello-worldx', (req, resp) => {
+    api.get('/hello-world', (req, resp) => {
         resp.json("ok")
     })
 
