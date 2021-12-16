@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node ./index.js",
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "test": "jest  --forceExit"
   },
   "author": "Daniel Saavedra",
   "license": "MIT",
@@ -24,7 +25,15 @@
     "mongoose": "^6.0.12",
     "uuid": "^8.3.2"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "devDependencies": {
+    "jest": "^27.4.5",
+    "supertest": "^6.1.6",
     "nodemon": "^2.0.15"
   }
 }
