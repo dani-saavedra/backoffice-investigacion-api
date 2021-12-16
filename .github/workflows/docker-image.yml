@@ -15,7 +15,7 @@ jobs:
         VERSION: $(date +%s)
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: build the docker image
-      run: docker build  . --file Dockerfile --tag back-invest:$VERSION
+      run: docker build  . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/back-invest:$VERSION
     - name: tag image
       run: docker tag back-invest:$VERSION ${{secrets.DOCKER_USERNAME}}/back-invest
     - name: Docker push
