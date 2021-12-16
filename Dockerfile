@@ -2,11 +2,11 @@ FROM node
 
 WORKDIR /investigacion
 
-COPY ["package.json","package-lock.json","./"]
+COPY package*.json ./
 
 RUN npm i
 
-COPY . .
+COPY . ./
 
-CMD ["npm","start"]
+CMD [ "npm", "start" ]
 
