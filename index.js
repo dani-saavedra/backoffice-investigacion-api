@@ -13,7 +13,7 @@ const { ApolloServer } = require('apollo-server-express')
 const key = 'CLAVEDIFICIL';
 
 const api = express();
-const iniciarServidor = async () => {
+const iniciarServidor = async ) => {
     const apollo = new ApolloServer(
         {
             typeDefs,
