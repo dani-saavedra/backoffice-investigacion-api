@@ -47,7 +47,7 @@ const iniciarServidor = async () => {
     })
 
     api.get('/api/dashboard/estudiante', [validarToken, estudiante], (request, response) => {
-        response.json("Soy el dashboard")
+        response.json("Soy el dashboard!")
     })
     api.listen('9092', () => console.log('Inicio server'))
 }
