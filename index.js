@@ -12,8 +12,8 @@ const { ApolloServer } = require('apollo-server-express')
 
 const key = 'CLAVEDIFICIL';
 
+const api = express();
 const iniciarServidor = async () => {
-    const api = express();
     const apollo = new ApolloServer(
         {
             typeDefs,
@@ -24,7 +24,7 @@ const iniciarServidor = async () => {
                     const perfil = jwt.verify(token, key)
                     if (perfil) {
                         rol = perfil.rolesito
-                        return {rol}
+                        return { rol }
                     }
                 } catch (error) {
                     console.log(error)
@@ -42,6 +42,9 @@ const iniciarServidor = async () => {
     api.get('/api/dashboard/admin', [validarToken, admin], (request, response) => {
         response.json("Soy el dashboard")
     })
+    api.get('/hello-world', (req, resp) => {
+        resp.json("ok")
+    })
 
     api.get('/api/dashboard/estudiante', [validarToken, estudiante], (request, response) => {
         response.json("Soy el dashboard")
@@ -49,3 +52,4 @@ const iniciarServidor = async () => {
     api.listen('9092', () => console.log('Inicio server'))
 }
 iniciarServidor()
+module.exports = api;
