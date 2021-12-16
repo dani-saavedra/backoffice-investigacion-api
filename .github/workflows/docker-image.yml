@@ -12,10 +12,11 @@ jobs:
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        VERSION: $(date +%s)
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: build the docker image
-      run: docker build . --file Dockerfile 
+      run: docker build -t back-invest:$VERSION . --file Dockerfile 
     - name: tag image
-      run: docker tag back-invest:$(date +%s) ${{secrets.DOCKER_USERNAME}}/back-invest
+      run: docker tag back-invest:$VERSION ${{secrets.DOCKER_USERNAME}}/back-invest
     - name: Docker push
-      run: docker push ${{secrets.DOCKER_USERNAME}}/prueba
+      run: docker push ${{secrets.DOCKER_USERNAME}}/back-invest
