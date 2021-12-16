@@ -14,6 +14,8 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: build the docker image
-      run: docker build . --file Dockerfile --tag danieludea28/prueba:$(date +%s)
+      run: docker build . --file Dockerfile 
+    - name: tag image
+      run: docker tag back-invest:$(date +%s) ${{secrets.DOCKER_USERNAME}}/back-invest
     - name: Docker push
       run: docker push ${{secrets.DOCKER_USERNAME}}/prueba
