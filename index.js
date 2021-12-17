@@ -19,16 +19,18 @@ const iniciarServidor = async () => {
             resolvers,
             context: ({ req }) => {
                 const token = req.headers.authorization;
-                try {
-                    const perfil = jwt.verify(token, key)
-                    if (perfil) {
-                        rol = perfil.rolesito
-                        return {rol}
+                if(token){
+                    try {
+                        const perfil = jwt.verify(token, key)
+                        if (perfil) {
+                            rol = perfil.rolesito
+                            return {rol}
+                        }
+                    } catch (error) {
+                        console.log(error)
                     }
-                } catch (error) {
-                    console.log(error)
+                    return {}
                 }
-                return {}
             }
         });
     await apollo.start()
