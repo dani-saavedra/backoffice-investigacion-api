@@ -13,6 +13,7 @@ const key = 'CLAVEDIFICIL';
 
 const api = express();
 const iniciarServidor = async () => {
+    
     const apollo = new ApolloServer(
         {
             typeDefs,
