@@ -1,15 +1,15 @@
-name: Basic Integration Continues
+name: continuous-integration
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [otrarama]
 jobs:
-  basic_ci:
+  continuous-integration:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: npm ci
-      - run: npm test
+      - run: npm ci && npm test
+        
