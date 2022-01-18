@@ -1,19 +1,20 @@
-name: Docker Image CI
+name: create image docker
 
 on:
   push:
-    branches: [ develop ]
+    branches: otrarama
+
 jobs:
-  build:
+  create-image:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Login Docker HUB
-      env:
-        DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: build the docker image
-      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/back-invests
-    - name: Docker push
-      run: docker push ${{secrets.DOCKER_USERNAME}}/back-invests
+      - uses: actions/checkout@v2
+      - name: Logeando en Docker
+        env:
+          PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p $PASSWORD
+      - name: construyendo la imagen
+        run: docker build . --file DockerFile -t ${{secrets.DOCKER_USERNAME}}/back-invests
+      - name: subiendo la imagen
+        run: docker push ${{secrets.DOCKER_USERNAME}}/back-invests
+        
