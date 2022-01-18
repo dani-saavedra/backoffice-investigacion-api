@@ -14,7 +14,7 @@ jobs:
           PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p $PASSWORD
       - name: construyendo la imagen
-        run: docker build . --file DockerFile -t ${{secrets.DOCKER_USERNAME}}/back-invests
+        run: docker build . --file Dockerfile -t ${{secrets.DOCKER_USERNAME}}/back-invests
       - name: subiendo la imagen
         run: docker push ${{secrets.DOCKER_USERNAME}}/back-invests
         
