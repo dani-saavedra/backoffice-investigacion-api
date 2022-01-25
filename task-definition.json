@@ -29,7 +29,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "https://278768778103.dkr.ecr.us-east-2.amazonaws.com/prueba1-app",
+      "image": "278768778103.dkr.ecr.us-west-1.amazonaws.com/investigacion-api",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -46,7 +46,7 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "prueba1-app"
+      "name": "investigacion-api"
     }
   ],
   "placementConstraints": [],
@@ -56,9 +56,16 @@
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-2:278768778103:task-definition/prueba-ecs-app:1",
-  "family": "prueba-ecs-app",
-  "requiresAttributes": [],
+  "taskDefinitionArn": "arn:aws:ecs:us-west-1:278768778103:task-definition/investigacion-api:1",
+  "family": "investigacion-api",
+  "requiresAttributes": [
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    }
+  ],
   "pidMode": null,
   "requiresCompatibilities": [
     "EC2"
