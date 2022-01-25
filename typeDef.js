@@ -13,6 +13,7 @@ const typeDefs = gql`
     }
     type Proyecto{
         identificador: String
+        cambio: String
         objetivosGenerales: String
         presupuesto: Int
         fechaTerminacion: Date
